@@ -1,13 +1,43 @@
 export class MCLoteria {
   private tabla: number[][];
   private ingresosPorLlamado: number [][];
+  private vecMuestra: number [][];
 
   public simular(n: number, lambda: number, indiceDesde: number, probAtienden: number): void {
     this.tabla = [];
+    this.vecMuestra = [];
+    
+    let indiceHasta: number = indiceDesde + 400;
+    if (indiceHasta > n - 1)
+      indiceHasta = n - 1;
 
     this.generarTablaIngresos(probAtienden);
 
-    
+    let ingresoTotal: number = 0;
+    let hora: number[];
+
+    // Iteramos por cada hora.
+    for (let i: number = 0; i < n; i++) {
+      hora = [i + 1];
+
+      const cantLlamados: number = this.getRndPoisson(lambda);
+      let ingresoHora: number = 0;
+
+      // Iteramos mientras haya llamados.
+      for (let j: number = 0; j < cantLlamados; j++) {
+        const rndIngreso: number = Math.random();
+        const ingresoLlamado: number = this.getIngreso(rndIngreso);
+        ingresoHora += ingresoLlamado;
+        hora.push(j + 1, ingresoLlamado);
+      }
+
+      ingresoTotal += ingresoHora;
+
+      hora.push(ingresoHora, ingresoTotal);
+
+      if (i >= indiceDesde - 1 && i <= indiceHasta)
+        this.vecMuestra.push(hora);
+    }
   }
 
   private generarTablaIngresos(probAtienden: number) {
@@ -55,9 +85,8 @@ export class MCLoteria {
     }
   }
 
-  // Método que obtiene el ingreso de la tabla de ingresos para un número aleatorio U(0, 1).
-  private getIngreso(): number {
-    const rnd: number = Math.random();
+  // Método que obtiene el ingreso de la tabla de ingresos para un número aleatorio U(0, 1) pasado por parámetro.
+  private getIngreso(rnd: number): number {
     for (let i: number = 0; i < this.generarTablaIngresos.length; i++) {
       const fila: number[] = this.ingresosPorLlamado[i];
       if (rnd < fila[2])
