@@ -1,16 +1,20 @@
 export class MCLoteria {
-  private tabla: number[][];
   private ingresosPorLlamado: number [][];
   private vecMuestra: number [][];
 
   public simular(n: number, lambda: number, indiceDesde: number, probAtienden: number): void {
-    this.tabla = [];
+    if (!this.validarProbabilidad(probAtienden)) {
+      alert('El valor de probabilidad ingresado debe estar comprendido entre 0 y 1.');
+      return;
+    }
+
     this.vecMuestra = [];
     
     let indiceHasta: number = indiceDesde + 400;
     if (indiceHasta > n - 1)
       indiceHasta = n - 1;
 
+    // Generamos la tabla de probabilidades de ingreso por llamado.
     this.generarTablaIngresos(probAtienden);
 
     let ingresoTotal: number = 0;
@@ -28,7 +32,7 @@ export class MCLoteria {
         const rndIngreso: number = Math.random();
         const ingresoLlamado: number = this.getIngreso(rndIngreso);
         ingresoHora += ingresoLlamado;
-        hora.push(j + 1, ingresoLlamado);
+        hora.push(Number(rndIngreso.toFixed(4)), ingresoLlamado);
       }
 
       ingresoTotal += ingresoHora;
@@ -40,6 +44,13 @@ export class MCLoteria {
     }
   }
 
+  private validarProbabilidad(prob: number): boolean {
+    if (prob >= 0 && prob <= 1)
+      return true;
+    return false;  
+  }
+
+  // Método que genera la tabla de ingreso en euros por llamado.
   private generarTablaIngresos(probAtienden: number) {
     this.ingresosPorLlamado = [];
 
@@ -87,7 +98,7 @@ export class MCLoteria {
 
   // Método que obtiene el ingreso de la tabla de ingresos para un número aleatorio U(0, 1) pasado por parámetro.
   private getIngreso(rnd: number): number {
-    for (let i: number = 0; i < this.generarTablaIngresos.length; i++) {
+    for (let i: number = 0; i < this.ingresosPorLlamado.length; i++) {
       const fila: number[] = this.ingresosPorLlamado[i];
       if (rnd < fila[2])
         return fila[0]; 
@@ -110,5 +121,13 @@ export class MCLoteria {
       rnd = rnd + 1;
     } while (p >= a);
     return rnd;
+  }
+
+  public getTablaMuestra(): number[][] {
+    return this.vecMuestra;
+  }
+
+  public getTablaProbabilidad(): number[][] {
+    return this.ingresosPorLlamado;
   }
 }
