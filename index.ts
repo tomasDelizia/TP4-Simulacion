@@ -1,16 +1,22 @@
-// Import stylesheets
+// Imports.
 import { HTMLUtils } from './HTMLUtils';
 import { MCLoteria } from './MCLoteria';
 import './style.css';
 
+// Definición de los cuadros de texto de la interfaz de usuario.
 const txtCantNros: HTMLInputElement = document.getElementById('txtCantNros') as HTMLInputElement;
 const txtLambda: HTMLInputElement = document.getElementById('txtLambda') as HTMLInputElement;
 const txtProbAtiende: HTMLInputElement = document.getElementById('txtProbAtiende') as HTMLInputElement;
 const txtIndiceDesde: HTMLInputElement = document.getElementById('txtIndiceDesde') as HTMLInputElement;
 
+// Definición de botones de la interfaz de usuario.
 const btnSimular: HTMLButtonElement = document.getElementById('btnSimular') as HTMLButtonElement;
 
-const divTablaMontecarlo: HTMLDivElement = document.getElementById('tablaMontecarlo') as HTMLDivElement;
+// Definición de la secciones de la simulación.
+const divTablaMontecarlo: HTMLDivElement = document.getElementById('divTablaMontecarlo') as HTMLDivElement;
+
+// Definición de la tabla de Montecarlo.
+const tablaMontecarlo: HTMLTableElement = document.getElementById('tablaMontecarlo') as HTMLTableElement;
 
 // Definición de los parámetros.
 let n: number;
@@ -18,12 +24,27 @@ let indiceDesde: number;
 let lambda: number;
 let probAtiende: number;
 
+// Definición del objeto que realiza la simulación de Monte Carlo.
+const monteCarlo: MCLoteria = new MCLoteria();
+
 HTMLUtils.ocultarSeccion(divTablaMontecarlo);
 
-btnSimular.addEventListener('click', () => {
+// Disparamos la simulación.
+btnSimular.addEventListener('click', async () => {
+  // Validamos los parámetros ingresados por el usuario.
   if (!validarParametros())
     return;
+
+  HTMLUtils.limpiarTabla(tablaMontecarlo);
   HTMLUtils.mostrarSeccion(divTablaMontecarlo);
+
+  // Realizamos la simulación.
+  await monteCarlo.simular(n, lambda, indiceDesde, probAtiende);
+
+  // Cargamos la tabla a mostrar.
+  HTMLUtils.agregarEncabezadoATabla(monteCarlo.getCantColumnas(), tablaMontecarlo);
+
+  console.log(monteCarlo.getTablaMuestra());
 });
 
 function validarParametros(): boolean {
@@ -45,6 +66,10 @@ function validarParametros(): boolean {
     alert('Lambda no puede ser un valor negativo');
     return false;
   }
+  if (indiceDesde <= 0 || indiceDesde > n) {
+    alert('El valor de probabilidad ingresado debe estar comprendido entre 0 y ' + n + '.');
+    return false;
+  }
   if (!(probAtiende >= 0 && probAtiende <= 1)) {
     alert('El valor de probabilidad ingresado debe estar comprendido entre 0 y 1.');
     return false;
@@ -52,14 +77,3 @@ function validarParametros(): boolean {
 
   return true;
 }
-
-const monteCarlo: MCLoteria = new MCLoteria();
-
-var startTime = performance.now()
-
-monteCarlo.simular(500, 20, 5, 0.85);
-    
-var endTime = performance.now()
-
-console.log(monteCarlo.getTablaMuestra());
-console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);

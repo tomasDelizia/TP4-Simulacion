@@ -40,6 +40,28 @@
           />
         </div>
       </div>
+      <div class="row mb-3 mx-3">
+        <div class="col">
+          <label class="form-label" for="txtIndiceDesde"
+            >Indice desde:</label
+          >
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            id="txtIndiceDesde"
+            name="txtIndiceDesde"
+          />
+        </div>
+        <div class="col">
+          <label class="form-label" for="txtProbAtiende"> Probabilidad de ser atendido: </label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            id="txtProbAtiende"
+            name="txtProbAtiende"
+          />
+        </div>
+      </div>
 
       <div class="row mb-3 mx-3">
         <button
@@ -50,17 +72,10 @@
         >Simular </button>
       </div>
 
-      <div id="tablaMontecarlo">
+      <div id="divTablaMontecarlo">
         <div class="row mb-3 mx-3">
-          <table id="tablaMontecarlos" class="table mx-3 mb-3">
+          <table id="tablaMontecarlo" class="table mx-3 mb-3">
             <thead>
-              <tr>
-                <th>Reloj(Día)</th>
-                <th>RND<sub>1</sub></th>
-                <th>Ingreso <sub>1</sub></th>
-                <th>Ingreso Total</th>
-                <th>Ingreso AC</th>
-              </tr>
             </thead>
             <tbody>
             </tbody>

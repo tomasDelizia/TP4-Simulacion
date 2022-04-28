@@ -3,7 +3,7 @@ export class MCLoteria {
   private vecMuestra: number [][];
   private maxColumnas: number;
 
-  public simular(n: number, lambda: number, indiceDesde: number, probAtiende: number): void {
+  public async simular(n: number, lambda: number, indiceDesde: number, probAtiende: number): Promise<void> {
 
     this.vecMuestra = [];
     this.maxColumnas = 0;
@@ -123,5 +123,9 @@ export class MCLoteria {
 
   public getTablaProbabilidad(): number[][] {
     return this.ingresosPorLlamado;
+  }
+
+  public getCantColumnas(): number {
+    return this.maxColumnas;
   }
 }
