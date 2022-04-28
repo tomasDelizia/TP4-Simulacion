@@ -10,11 +10,9 @@ export module HTMLUtils {
     div.style.display = 'block';
   }
 
-    // Función que elimina todas las filas de la tabla HTML.
+    // Función que elimina todas las filas de la tabla HTML, incluyendo los encabezados.
     export function limpiarTabla(tabla: HTMLTableElement): void {
-      tabla.deleteTHead();
-
-      for (let i: number = tabla.rows.length; i >= 1; i--) {
+      for (let i: number = tabla.rows.length; i > 0; i--) {
         tabla.deleteRow(i - 1);
       }
     }
@@ -43,26 +41,24 @@ export module HTMLUtils {
 
     // Agregar las columnas al encabezado de la tabla.
     export function agregarEncabezadoATabla(cantColumnas: number, tabla: HTMLTableElement): void {
-      tabla.createTHead();
       let filaHTML: HTMLTableRowElement = tabla.getElementsByTagName('thead')[0].insertRow();
 
-      let reloj: HTMLTableHeaderCellElement = filaHTML.insertCell();
-      reloj.appendChild(document.createTextNode('Reloj (Hs)'));
+      let colReloj: HTMLTableHeaderCellElement = filaHTML.insertCell();
+      colReloj.appendChild(document.createTextNode('Reloj (Hs)'));
 
       let cont: number = 1;
       for (let i: number = 1; i <= cantColumnas - 3; i += 2) {
-        let celdaRnd: HTMLTableHeaderCellElement = filaHTML.insertCell();
-        celdaRnd.appendChild(document.createTextNode('RND Llamado ' + cont));
-        let celdaIngreso: HTMLTableHeaderCellElement = filaHTML.insertCell();
-        celdaIngreso.appendChild(document.createTextNode('Ingreso (€)'));
+        let colRnd: HTMLTableHeaderCellElement = filaHTML.insertCell();
+        colRnd.appendChild(document.createTextNode('RND Llamado ' + cont));
+        let colIngreso: HTMLTableHeaderCellElement = filaHTML.insertCell();
+        colIngreso.appendChild(document.createTextNode('Ingreso (€)'));
         cont++;
       }
       
-      let ingresoHora: HTMLTableHeaderCellElement = filaHTML.insertCell();
-      ingresoHora.appendChild(document.createTextNode('Ingreso Hora (€)'));
+      let colIngresoHora: HTMLTableHeaderCellElement = filaHTML.insertCell();
+      colIngresoHora.appendChild(document.createTextNode('Ingreso Hora (€)'));
 
-      let ingresoTotal: HTMLTableHeaderCellElement = filaHTML.insertCell();
-      ingresoTotal.appendChild(document.createTextNode('Ingreso Total (€)'));
-      
+      let colIngresoTotal: HTMLTableHeaderCellElement = filaHTML.insertCell();
+      colIngresoTotal.appendChild(document.createTextNode('Ingreso Total (€)'));
     }
 }
