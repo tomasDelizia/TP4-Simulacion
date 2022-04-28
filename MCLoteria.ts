@@ -1,21 +1,19 @@
 export class MCLoteria {
   private ingresosPorLlamado: number [][];
   private vecMuestra: number [][];
+  private maxColumnas: number;
 
-  public simular(n: number, lambda: number, indiceDesde: number, probAtienden: number): void {
-    if (!this.validarProbabilidad(probAtienden)) {
-      alert('El valor de probabilidad ingresado debe estar comprendido entre 0 y 1.');
-      return;
-    }
+  public simular(n: number, lambda: number, indiceDesde: number, probAtiende: number): void {
 
     this.vecMuestra = [];
+    this.maxColumnas = 0;
     
     let indiceHasta: number = indiceDesde + 400;
     if (indiceHasta > n - 1)
       indiceHasta = n - 1;
 
     // Generamos la tabla de probabilidades de ingreso por llamado.
-    this.generarTablaIngresos(probAtienden);
+    this.generarTablaIngresos(probAtiende);
 
     let ingresoTotal: number = 0;
     let hora: number[];
@@ -39,23 +37,19 @@ export class MCLoteria {
 
       hora.push(ingresoHora, ingresoTotal);
 
-      if (i >= indiceDesde - 1 && i <= indiceHasta)
+      if (i >= indiceDesde - 1 && i <= indiceHasta) {
         this.vecMuestra.push(hora);
+        this.maxColumnas = Math.max(this.maxColumnas, hora.length);
+      }
     }
   }
 
-  private validarProbabilidad(prob: number): boolean {
-    if (prob >= 0 && prob <= 1)
-      return true;
-    return false;  
-  }
-
   // Método que genera la tabla de ingreso en euros por llamado.
-  private generarTablaIngresos(probAtienden: number) {
+  private generarTablaIngresos(probAtiende: number) {
     this.ingresosPorLlamado = [];
 
     // Definición de las probabilidades.
-    let probNoAtienden: number = 1 - probAtienden;
+    let probNoAtienden: number = 1 - probAtiende;
     
     let probHombre: number = 0.2;
     let probMujer: number = 1 - probHombre;
@@ -66,17 +60,17 @@ export class MCLoteria {
     let probMSi: number = 0.7;
     let probMNo: number = 1 - probMSi;
 
-    let probH0Eur: number = probAtienden * probHombre * probHNo;
-    let probH5Eur: number = probAtienden * probHombre * probHSi * 0.05;
-    let probH10Eur: number = probAtienden * probHombre * probHSi * 0.2;
-    let probH15Eur: number = probAtienden * probHombre * probHSi * 0.35;
-    let probH25Eur: number = probAtienden * probHombre * probHSi * 0.4;
+    let probH0Eur: number = probAtiende * probHombre * probHNo;
+    let probH5Eur: number = probAtiende * probHombre * probHSi * 0.05;
+    let probH10Eur: number = probAtiende * probHombre * probHSi * 0.2;
+    let probH15Eur: number = probAtiende * probHombre * probHSi * 0.35;
+    let probH25Eur: number = probAtiende * probHombre * probHSi * 0.4;
 
-    let probM0Eur: number = probAtienden * probMujer * probMNo;
-    let probM5Eur: number = probAtienden * probMujer * probMSi * 0.2;
-    let probM10Eur: number = probAtienden * probMujer * probMSi * 0.6;
-    let probM15Eur: number = probAtienden * probMujer * probMSi * 0.15;
-    let probM25Eur: number = probAtienden * probMujer * probMSi * 0.05;
+    let probM0Eur: number = probAtiende * probMujer * probMNo;
+    let probM5Eur: number = probAtiende * probMujer * probMSi * 0.2;
+    let probM10Eur: number = probAtiende * probMujer * probMSi * 0.6;
+    let probM15Eur: number = probAtiende * probMujer * probMSi * 0.15;
+    let probM25Eur: number = probAtiende * probMujer * probMSi * 0.05;
 
     this.ingresosPorLlamado.push(
       [0, probNoAtienden + probH0Eur + probM0Eur],

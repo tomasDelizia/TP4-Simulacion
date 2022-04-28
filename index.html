@@ -1,1 +1,72 @@
-<div id="app"></div>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP4 Simulación</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+    <link type="text/css" rel="stylesheet" href="./style.css" />
+    <div id="app"></div>
+  </head>
+
+  <body>
+    <h1 class="text-center">Trabajo Práctico N°4 de Simulación</h1>
+    <h2 class="text-center">Método de Montecarlo</h2>
+
+    <form>
+      <div class="row mb-3 mx-3">
+        <div class="col">
+          <label class="form-label" for="txtCantNros"
+            >Cantidad de números a generar (N):</label
+          >
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            id="txtCantNros"
+            name="txtCantNros"
+          />
+        </div>
+
+        <div class="col">
+          <label class="form-label" for="txtLambda">Lambda (λ): </label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            id="txtLambda"
+            name="txtLambda"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3 mx-3">
+        <button
+          class="btn btn-dark mb-2 mx-2 form-control form-control-sm"
+          id="btnSimular"
+          type="button"
+          name="btnSimular"
+        >Simular </button>
+      </div>
+
+      <div id="tablaMontecarlo">
+        <div class="row mb-3 mx-3">
+          <table id="tablaMontecarlos" class="table mx-3 mb-3">
+            <thead>
+              <tr>
+                <th>Reloj(Día)</th>
+                <th>RND<sub>1</sub></th>
+                <th>Ingreso <sub>1</sub></th>
+                <th>Ingreso Total</th>
+                <th>Ingreso AC</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
