@@ -2,12 +2,16 @@ export class MCLoteria {
   private ingresosPorLlamado: number [][];
   private tablaMuestra: number [][];
   private maxColumnas: number;
+  private ingresoPromedioPorHora: number;
+  private ingresoMaximo: number;
+  private ingresoMinimo: number;
 
   public async simular(n: number, lambda: number, indiceDesde: number, probAtiende: number): Promise<void> {
-
     this.tablaMuestra = [];
     this.maxColumnas = 0;
+    this.ingresoPromedioPorHora = 0;
     
+    //Definimos el rango de filas que vamos a mostrar.
     let indiceHasta: number = indiceDesde + 399;
     if (indiceHasta > n - 1)
       indiceHasta = n;
@@ -16,6 +20,8 @@ export class MCLoteria {
     this.generarTablaIngresos(probAtiende);
 
     let ingresoTotal: number = 0;
+    this.ingresoMaximo = 0;
+    this.ingresoMinimo = Math.pow(10, 1000)
     let hora: number[];
 
     // Iteramos por cada hora.
@@ -33,15 +39,21 @@ export class MCLoteria {
         hora.push(Number(rndIngreso.toFixed(4)), ingresoLlamado);
       }
 
+      //Definimos el ingreso ingreso en esa hora y el ingreso total.
       ingresoTotal += ingresoHora;
-
       hora.push(ingresoHora, ingresoTotal);
 
-      if (i >= indiceDesde && i <= indiceHasta) {
+      //Calculamos metricas necesarias
+      this.ingresoMaximo = Math.max(this.ingresoMaximo, ingresoHora);     
+      this.ingresoMinimo = Math.min(this.ingresoMinimo, ingresoHora);
+
+      //Cargamos la tabla a mostrar con las filas correspondientes mas la ultima fila.
+      if ((i >= indiceDesde && i <= indiceHasta) || i == n) {
         this.tablaMuestra.push(hora);
         this.maxColumnas = Math.max(this.maxColumnas, hora.length);
       }
     }
+    this.ingresoPromedioPorHora = ingresoTotal/n;
   }
 
   // Método que genera la tabla de ingreso en euros por llamado.
@@ -127,5 +139,17 @@ export class MCLoteria {
 
   public getCantColumnas(): number {
     return this.maxColumnas;
+  }
+
+  public getingresoPromedioPorHora(): number {
+    return this.ingresoPromedioPorHora;
+  }
+
+  public getingresoMaximmo(): number {
+    return this.ingresoMaximo;
+  }
+
+  public getingresoMinimo(): number {
+    return this.ingresoMinimo;
   }
 }

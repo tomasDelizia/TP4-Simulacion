@@ -19,9 +19,7 @@
     <form>
       <div class="row mb-3 mx-3">
         <div class="col">
-          <label class="form-label" for="txtCantNros"
-            >Cantidad de números a generar (N):</label
-          >
+          <label class="form-label" for="txtCantNros">Cantidad de números a generar (N): </label>
           <input
             type="number"
             class="form-control form-control-sm"
@@ -40,11 +38,10 @@
           />
         </div>
       </div>
+
       <div class="row mb-3 mx-3">
         <div class="col">
-          <label class="form-label" for="txtIndiceDesde"
-            >Indice desde:</label
-          >
+          <label class="form-label" for="txtIndiceDesde">Hora desde:</label>
           <input
             type="number"
             class="form-control form-control-sm"
@@ -53,7 +50,7 @@
           />
         </div>
         <div class="col">
-          <label class="form-label" for="txtProbAtiende"> Probabilidad de ser atendido: </label>
+          <label class="form-label" for="txtProbAtiende">Probabilidad de ser atendido: </label>
           <input
             type="number"
             class="form-control form-control-sm"
@@ -79,7 +76,16 @@
             </tbody>
           </table>
         </div>
+
+        <div class="mb-3 mx-3 row">
+          <div class="col-3 alert alert-info mx-2" role="alert" id="alertResIngresoPorHora">Ingreso Promedio Por Hora: € </div>
+          <div class="col-3 alert alert-info mx-2" role="alert" id="alertResIngresoComision">Ingreso Promedio Por Hora con Comision (35%): €  </div>
+          <div class="col-2 alert alert-info mx-2" role="alert" id="alertResIngresoMaximo">Ingreso Maximo: €  </div>  
+          <div class="col-2 alert alert-info mx-2" role="alert" id="alertResIngresoMinimo">Ingreso Minimo: €  </div>         
+        </div>
       </div>
+
+
     </form>
   </body>
 </html>
