@@ -63,7 +63,7 @@ function validarParametros(): boolean {
     alert('La cantidad de números a generar debe ser mayor a cero.');
     return false;
   }
-  if (lambda < 0){
+  if (lambda < 0) {
     alert('Lambda no puede ser un valor negativo');
     return false;
   }

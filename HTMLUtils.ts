@@ -50,7 +50,7 @@ export module HTMLUtils {
       let cont: number = 1;
       for (let i: number = 1; i <= cantColumnas - 3; i += 2) {
         let celdaRnd: HTMLTableHeaderCellElement = filaHTML.insertCell();
-        celdaRnd.appendChild(document.createTextNode('RND' + cont));
+        celdaRnd.appendChild(document.createTextNode('RND Llamado ' + cont));
         let celdaIngreso: HTMLTableHeaderCellElement = filaHTML.insertCell();
         celdaIngreso.appendChild(document.createTextNode('Ingreso (€)'));
         cont++;
