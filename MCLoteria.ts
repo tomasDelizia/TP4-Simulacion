@@ -1,16 +1,16 @@
 export class MCLoteria {
   private ingresosPorLlamado: number [][];
-  private vecMuestra: number [][];
+  private tablaMuestra: number [][];
   private maxColumnas: number;
 
   public async simular(n: number, lambda: number, indiceDesde: number, probAtiende: number): Promise<void> {
 
-    this.vecMuestra = [];
+    this.tablaMuestra = [];
     this.maxColumnas = 0;
     
-    let indiceHasta: number = indiceDesde + 400;
+    let indiceHasta: number = indiceDesde + 399;
     if (indiceHasta > n - 1)
-      indiceHasta = n - 1;
+      indiceHasta = n;
 
     // Generamos la tabla de probabilidades de ingreso por llamado.
     this.generarTablaIngresos(probAtiende);
@@ -19,8 +19,8 @@ export class MCLoteria {
     let hora: number[];
 
     // Iteramos por cada hora.
-    for (let i: number = 0; i < n; i++) {
-      hora = [i + 1];
+    for (let i: number = 1; i <= n; i++) {
+      hora = [i];
 
       const cantLlamados: number = this.getRndPoisson(lambda);
       let ingresoHora: number = 0;
@@ -37,8 +37,8 @@ export class MCLoteria {
 
       hora.push(ingresoHora, ingresoTotal);
 
-      if (i >= indiceDesde - 1 && i <= indiceHasta) {
-        this.vecMuestra.push(hora);
+      if (i >= indiceDesde && i <= indiceHasta) {
+        this.tablaMuestra.push(hora);
         this.maxColumnas = Math.max(this.maxColumnas, hora.length);
       }
     }
@@ -118,7 +118,7 @@ export class MCLoteria {
   }
 
   public getTablaMuestra(): number[][] {
-    return this.vecMuestra;
+    return this.tablaMuestra;
   }
 
   public getTablaProbabilidad(): number[][] {

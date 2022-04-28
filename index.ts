@@ -42,9 +42,10 @@ btnSimular.addEventListener('click', async () => {
   await monteCarlo.simular(n, lambda, indiceDesde, probAtiende);
 
   // Cargamos la tabla a mostrar.
-  HTMLUtils.agregarEncabezadoATabla(monteCarlo.getCantColumnas(), tablaMontecarlo);
-
-  console.log(monteCarlo.getTablaMuestra());
+  const cantColumnas: number = monteCarlo.getCantColumnas();
+  HTMLUtils.agregarEncabezadoATabla(cantColumnas, tablaMontecarlo);
+  for (let i: number = 0; i < n; i++)
+    HTMLUtils.agregarFilaATabla(monteCarlo.getTablaMuestra()[i], cantColumnas, tablaMontecarlo);
 });
 
 function validarParametros(): boolean {
@@ -67,7 +68,7 @@ function validarParametros(): boolean {
     return false;
   }
   if (indiceDesde <= 0 || indiceDesde > n) {
-    alert('El valor de probabilidad ingresado debe estar comprendido entre 0 y ' + n + '.');
+    alert('El valor de probabilidad ingresado debe estar comprendido entre 1 y ' + n + '.');
     return false;
   }
   if (!(probAtiende >= 0 && probAtiende <= 1)) {
