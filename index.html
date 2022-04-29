@@ -1,1 +1,101 @@
-<div id="app"></div>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP4 Simulación</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+    <div id="app"></div>
+  </head>
+
+  <body>
+    <h1 class="text-center">Trabajo Práctico N°4 de Simulación</h1>
+    <h2 class="text-center">Método de Montecarlo</h2>
+
+    <form>
+      <div class="row mb-3 mx-3">
+        <div class="col">
+          <label class="form-label" for="txtCantNros">Cantidad de números a generar (N): </label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            id="txtCantNros"
+            name="txtCantNros"
+          />
+        </div>
+
+        <div class="col">
+          <label class="form-label" for="txtLambda">Lambda (λ): </label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            id="txtLambda"
+            name="txtLambda"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3 mx-3">
+        <div class="col">
+          <label class="form-label" for="txtIndiceDesde">Hora desde:</label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            id="txtIndiceDesde"
+            name="txtIndiceDesde"
+          />
+        </div>
+        <div class="col">
+          <label class="form-label" for="txtProbAtiende">Probabilidad de ser atendido: </label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            id="txtProbAtiende"
+            name="txtProbAtiende"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3 mx-3">
+        <button
+          class="btn btn-dark mb-2 mx-2 form-control form-control-sm"
+          id="btnSimular"
+          type="button"
+          name="btnSimular"
+        >
+        <span class="spinner-border spinner-border-sm" role="status" id="spinnerSimular" hidden></span>
+        Simular
+      </button>
+      </div>
+
+      <div id="divTablaMontecarlo">
+        <div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
+          <div class="modal-dialog modal-dialog-centered text-center" role="document">
+              <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
+          </div>
+      </div>
+
+        <div class="table-responsive scrollable row mb-3 mx-3">
+          <table id="tablaMontecarlo" class="table table-bordered table-hover mx-3 mb-3">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mb-3 mx-3 row justify-content-center text-center">
+          <div class="col-md-3  alert alert-info mx-2" role="alert" id="alertResIngresoPorHora"></div>
+          <div class="col-md-3 alert alert-info mx-2" role="alert" id="alertResIngresoComision"></div>
+          <div class="col-md-2 alert alert-info mx-2" role="alert" id="alertResIngresoMaximo"></div>  
+          <div class="col-md-2 alert alert-info mx-2" role="alert" id="alertResIngresoMinimo"></div>         
+        </div>
+      </div>
+
+
+    </form>
+  </body>
+</html>
