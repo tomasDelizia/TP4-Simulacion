@@ -40,7 +40,11 @@ HTMLUtils.ocultarSeccion(divTablaMontecarlo);
 // Disparamos la simulación.
 btnSimular.addEventListener('click', async () => {
   HTMLUtils.mostrarSpinner(spinnerSimular, btnSimular);
+  await simular();
+  HTMLUtils.ocultarSpinner(spinnerSimular, btnSimular);
+});
 
+const simular = async () => {
   alertResIngresoPorHora.innerHTML = 'Ingreso Promedio Por Hora: ';
   alertResIngresoComision.innerHTML = 'Ingreso Promedio Por Hora con Comisión (35%): ';
   alertResIngresoMaximo.innerHTML = 'Ingreso Máximo: ';
@@ -71,10 +75,10 @@ btnSimular.addEventListener('click', async () => {
   alertResIngresoMaximo.innerHTML += monteCarlo.getingresoMaximmo() + ' €';
   alertResIngresoMinimo.innerHTML += monteCarlo.getingresoMinimo() + ' €';
 
-  var endTime = performance.now()
+  var endTime = performance.now();
 
-  console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)  
-});
+  console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);
+}
 
 function validarParametros(): boolean {
   if (txtCantNros.value === '' || txtLambda.value === '' || txtProbAtiende.value === '' || txtIndiceDesde.value === '') {
