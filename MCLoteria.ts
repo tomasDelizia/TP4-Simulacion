@@ -29,6 +29,8 @@ export class MCLoteria {
       hora = [i];
 
       const cantLlamados: number = this.getRndPoisson(lambda);
+      hora.push(cantLlamados);
+
       let ingresoHora: number = 0;
 
       // Iteramos mientras haya llamados.

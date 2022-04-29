@@ -34,10 +34,12 @@ export module HTMLUtils {
     const tamFila: number = fila.length;
     let filaHTML: HTMLTableRowElement = tabla.getElementsByTagName('tbody')[0].insertRow();
     for (let i: number = 0; i < cantColumnas - 2; i++) {
-      // Agregamos guiones para las horas que tengan menos columnas que la hora con la mayor cantidad de horas.
+      // Agregamos guiones para los vectores que tengan menos columnas que el vector con la mayor cantidad de columnas.
       const valor: string = !(typeof fila[i] === 'undefined') ? String(fila[i]) : '-';
 
       let celda: HTMLTableDataCellElement = filaHTML.insertCell();
+
+      // Agregamos guiones en las celdas correspondientes al ingreso total y al ingreso acumulado.
       if (i == tamFila - 2 || i == tamFila - 1)
         celda.appendChild(document.createTextNode('-'));
       else
@@ -58,8 +60,11 @@ export module HTMLUtils {
     let colReloj: HTMLTableHeaderCellElement = filaHTML.insertCell();
     colReloj.appendChild(document.createTextNode('Reloj (Hs)'));
 
+    let colLlamados: HTMLTableHeaderCellElement = filaHTML.insertCell();
+    colLlamados.appendChild(document.createTextNode('RND Cant. Llamados'));
+
     let cont: number = 1;
-    for (let i: number = 1; i <= cantColumnas - 3; i += 2) {
+    for (let i: number = 1; i <= cantColumnas - 4; i += 2) {
       let colRnd: HTMLTableHeaderCellElement = filaHTML.insertCell();
       colRnd.appendChild(document.createTextNode('RND Llamado ' + cont));
       let colIngreso: HTMLTableHeaderCellElement = filaHTML.insertCell();
