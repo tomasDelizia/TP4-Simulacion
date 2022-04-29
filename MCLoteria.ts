@@ -11,7 +11,7 @@ export class MCLoteria {
     this.maxColumnas = 0;
     this.ingresoPromedioPorHora = 0;
     
-    //Definimos el rango de filas que vamos a mostrar.
+    // Definimos el rango de filas que vamos a mostrar.
     let indiceHasta: number = indiceDesde + 399;
     if (indiceHasta > n - 1)
       indiceHasta = n;
@@ -39,15 +39,15 @@ export class MCLoteria {
         hora.push(Number(rndIngreso.toFixed(4)), ingresoLlamado);
       }
 
-      //Definimos el ingreso ingreso en esa hora y el ingreso total.
+      // Definimos el ingreso en esa hora y el ingreso total.
       ingresoTotal += ingresoHora;
       hora.push(ingresoHora, ingresoTotal);
 
-      //Calculamos metricas necesarias
+      // Calculamos métricas necesarias
       this.ingresoMaximo = Math.max(this.ingresoMaximo, ingresoHora);     
       this.ingresoMinimo = Math.min(this.ingresoMinimo, ingresoHora);
 
-      //Cargamos la tabla a mostrar con las filas correspondientes mas la ultima fila.
+      // Cargamos la tabla a mostrar con las filas correspondientes mas la última fila.
       if ((i >= indiceDesde && i <= indiceHasta) || i == n) {
         this.tablaMuestra.push(hora);
         this.maxColumnas = Math.max(this.maxColumnas, hora.length);

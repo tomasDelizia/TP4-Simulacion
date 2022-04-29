@@ -28,6 +28,9 @@ let lambda: number;
 let indiceDesde: number;
 let probAtiende: number;
 
+// Definición del elemento spinner.
+const spinnerSimular: HTMLSpanElement = document.getElementById('spinnerSimular') as HTMLSpanElement;
+
 // Definición del objeto que realiza la simulación de Monte Carlo.
 const monteCarlo: MCLoteria = new MCLoteria();
 
@@ -36,10 +39,13 @@ HTMLUtils.ocultarSeccion(divTablaMontecarlo);
 
 // Disparamos la simulación.
 btnSimular.addEventListener('click', async () => {
-  alertResIngresoPorHora.innerHTML = 'Ingreso Promedio Por Hora: €';
-  alertResIngresoComision.innerHTML = 'Ingreso Promedio Por Hora con Comision (35%): €';
-  alertResIngresoMaximo.innerHTML = 'Ingreso Maximo: €';
-  alertResIngresoMinimo.innerHTML = 'Ingreso Minimo: €';
+  HTMLUtils.mostrarSpinner(spinnerSimular, btnSimular);
+
+  alertResIngresoPorHora.innerHTML = 'Ingreso Promedio Por Hora: ';
+  alertResIngresoComision.innerHTML = 'Ingreso Promedio Por Hora con Comisión (35%): ';
+  alertResIngresoMaximo.innerHTML = 'Ingreso Máximo: ';
+  alertResIngresoMinimo.innerHTML = 'Ingreso Mínimo: ';
+  
   // Validamos los parámetros ingresados por el usuario.
   if (!validarParametros())
     return;
@@ -59,11 +65,11 @@ btnSimular.addEventListener('click', async () => {
     await HTMLUtils.agregarFilaATabla(monteCarlo.getTablaMuestra()[i], cantColumnas, tablaMontecarlo);
 
   // Cargamos las métricas.
-  alertResIngresoPorHora.innerHTML += monteCarlo.getingresoPromedioPorHora().toFixed(2);;
+  alertResIngresoPorHora.innerHTML += monteCarlo.getingresoPromedioPorHora().toFixed(2) + ' €';
   const ingresoComision: number = monteCarlo.getingresoPromedioPorHora() * 0.65;
-  alertResIngresoComision.innerHTML += ingresoComision.toFixed(2);
-  alertResIngresoMaximo.innerHTML += monteCarlo.getingresoMaximmo();
-  alertResIngresoMinimo.innerHTML += monteCarlo.getingresoMinimo();
+  alertResIngresoComision.innerHTML += ingresoComision.toFixed(2) + ' €';
+  alertResIngresoMaximo.innerHTML += monteCarlo.getingresoMaximmo() + ' €';
+  alertResIngresoMinimo.innerHTML += monteCarlo.getingresoMinimo() + ' €';
 
   var endTime = performance.now()
 

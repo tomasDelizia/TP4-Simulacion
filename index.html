@@ -66,7 +66,10 @@
           id="btnSimular"
           type="button"
           name="btnSimular"
-        >Simular </button>
+        >
+        <span class="spinner-border spinner-border-sm" role="status" id="spinnerSimular" hidden></span>
+        Simular
+      </button>
       </div>
 
       <div id="divTablaMontecarlo">
@@ -86,10 +89,10 @@
         </div>
 
         <div class="mb-3 mx-3 row">
-          <div class="col-3 alert alert-info mx-2" role="alert" id="alertResIngresoPorHora">Ingreso Promedio Por Hora: € </div>
-          <div class="col-3 alert alert-info mx-2" role="alert" id="alertResIngresoComision">Ingreso Promedio Por Hora con Comision (35%): €  </div>
-          <div class="col-2 alert alert-info mx-2" role="alert" id="alertResIngresoMaximo">Ingreso Maximo: €  </div>  
-          <div class="col-2 alert alert-info mx-2" role="alert" id="alertResIngresoMinimo">Ingreso Minimo: €  </div>         
+          <div class="col-3 alert alert-info mx-2" role="alert" id="alertResIngresoPorHora"></div>
+          <div class="col-3 alert alert-info mx-2" role="alert" id="alertResIngresoComision"></div>
+          <div class="col-2 alert alert-info mx-2" role="alert" id="alertResIngresoMaximo"></div>  
+          <div class="col-2 alert alert-info mx-2" role="alert" id="alertResIngresoMinimo"></div>         
         </div>
       </div>
 
