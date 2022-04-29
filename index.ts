@@ -76,8 +76,7 @@ const simular = async () => {
   alertResIngresoMinimo.innerHTML += monteCarlo.getingresoMinimo() + ' €';
 
   var endTime = performance.now();
-
-  console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);
+  console.log(`La simulación tardó ${endTime - startTime} milisegundos`);
 }
 
 function validarParametros(): boolean {
