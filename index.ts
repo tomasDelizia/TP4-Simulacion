@@ -99,7 +99,7 @@ function validarParametros(): boolean {
     return false;
   }
   if (indiceDesde <= 0 || indiceDesde > n) {
-    alert('El valor de probabilidad ingresado debe estar comprendido entre 1 y ' + n + '.');
+    alert('La hora desde debe estar comprendida entre 1 y ' + n + '.');
     return false;
   }
   if (!(probAtiende >= 0 && probAtiende <= 1)) {
